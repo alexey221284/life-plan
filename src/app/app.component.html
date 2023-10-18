@@ -1,1 +1,26 @@
-<app-autocomplete></app-autocomplete>
+<div class="header">
+    <label><input type="checkbox" class="mainCheckbox">Скрыть выполненные</label>
+    <button class="add-task" (click)="addRow()">Создать задачу</button>
+</div>
+
+<table class='main_table'>
+    <tr class="row">
+        <th class="table-header">Номер</th>
+        <th class="table-header">Наименование</th>
+        <th class="table-header">Дата</th>
+        <th class="table-header">Статус</th>
+        <th class="table-header">Действия</th>
+    </tr>
+    <tr *ngFor="let item of items">
+        <td class="cell">{{item.id}}</td>
+        <td class="cell">{{item.name}}</td>
+        <td class="cell">{{item.date}}</td>
+        <td class="cell">
+            <input type="checkbox" [checked]="item.status">
+        </td>
+        <td class="cell">
+            <button class="button-edit">Редактировать</button>
+            <button class="button-delete" (click)="deleteRowById(item.id)">Удалить</button>
+        </td>
+    </tr>
+</table>

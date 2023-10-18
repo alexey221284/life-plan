@@ -1,7 +1,7 @@
 {
-  "name": "autocompleteapp",
+  "name": "life_plan",
   "version": "1.0.0",
-  "description": "autocomplete for picasso software",
+  "description": "life plan",
   "author": "Alexey Zhumaev",
   "scripts": {
     "ng": "ng",

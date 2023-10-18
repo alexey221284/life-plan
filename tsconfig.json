@@ -2,6 +2,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "forceConsistentCasingInFileNames": true,
+    //"strict": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "removeComments": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
