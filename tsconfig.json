@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "forceConsistentCasingInFileNames": true,
-    //"strict": true,
+    "strict": true,
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,

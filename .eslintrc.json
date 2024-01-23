@@ -1,0 +1,161 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    /**
+     * -----------------------------------------------------
+     * TYPESCRIPT FILES (COMPONENTS, SERVICES ETC) (.ts)
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["rxjs", "rxjs-angular"],
+      "extends": [
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base",
+        "plugin:rxjs/recommended"
+      ],
+      "rules": {
+        // Angular
+        "@angular-eslint/component-selector": [
+          "error",
+          { "type": "element", "prefix": "app", "style": "kebab-case" }
+        ],
+        "@angular-eslint/directive-selector": ["off"],
+
+        // vanilla es-lint
+        "curly": ["error", "multi-line"],
+        "no-empty-function": ["error", { "allow": ["constructors"] }],
+        "no-empty": "error",
+        "no-return-assign": ["error", "except-parens"],
+        "no-underscore-dangle": ["error", { "allowAfterThis": true, "allowAfterSuper": true }],
+        "no-param-reassign": ["error", { "ignorePropertyModificationsFor": ["acc"] }],
+        "no-duplicate-imports": ["error", { "includeExports": true }],
+        "no-console": "error",
+        "no-else-return": ["error", { "allowElseIf": false }],
+        "no-implicit-coercion": ["error", { "disallowTemplateShorthand": true }],
+        "no-labels": "error",
+        "no-lone-blocks": "error",
+        "no-multi-spaces": "error",
+        "no-new": "error",
+        "no-return-await": "error",
+        "no-useless-call": "error",
+        "no-confusing-arrow": "error",
+        "prefer-destructuring": ["error", { "object": true, "array": true }],
+        "operator-linebreak": "off",
+        "max-classes-per-file": ["error", 2],
+
+        // @Typescript/es-lint
+        "@typescript-eslint/no-unnecessary-type-arguments": "warn",
+        "@typescript-eslint/prefer-readonly": "error",
+        "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": true }],
+        "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": true }],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "constructors": "no-public",
+              "methods": "no-public",
+              "properties": "off",
+              "accessors": "off"
+            }
+          }
+        ],
+        "@typescript-eslint/member-ordering": [
+          "warn",
+          {
+            "default": [
+              "public-abstract-field",
+              "protected-abstract-field",
+              "field",
+              "private-field",
+              "constructor",
+              "decorated-method",
+              "static-method",
+              "abstract-method",
+              "method",
+              "private-static-method",
+              "private-method"
+            ]
+          }
+        ],
+
+        // Правила "@typescript-eslint, которые требуют отключение es-lint правил.
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          { "ignoreRestSiblings": true, "argsIgnorePattern": "^_" }
+        ],
+
+        // rxjs
+        "rxjs/no-ignored-subscription": "error",
+        "rxjs/no-internal": "error",
+        "rxjs/no-topromise": "error",
+        "rxjs/no-unsafe-catch": "error",
+        "rxjs/throw-error": "error",
+        "rxjs/no-sharereplay": "warn",
+        "rxjs/no-ignored-subscribe": "error",
+        "rxjs/no-ignored-observable": "error",
+        "rxjs/no-finnish": "error",
+        "rxjs/no-exposed-subjects": ["error", { "allowProtected": true }],
+        "rxjs/no-connectable": "error",
+
+        // Отключение нежелательных правил из рекомендуемых расширений
+        "arrow-parens": "off",
+        "max-len": "off",
+        "object-curly-newline": "off",
+        "implicit-arrow-linebreak": "off",
+        "class-methods-use-this": "off",
+        "consistent-return": "off",
+        "no-plusplus": "off",
+        "function-paren-newline": "off",
+
+        "@angular-eslint/no-outputs-metadata-property": "off", // Это нужно для типизации декорированных полей миксинов
+        "@angular-eslint/no-inputs-metadata-property": "off", // Это нужно для типизации декорированных полей миксинов
+        "rxjs/no-implicit-any-catch": "off", // TODO: Настроить ошибки и включить это правило.
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "@typescript-eslint/no-useless-constructor": "off", // Отключено, чтобы не ругался в миксинах. Миксины требуют явно указывать конструктор, даже, если он просто прокидывает аргументы в super
+        "@typescript-eslint/brace-style": "off",
+
+        "import/no-extraneous-dependencies": "off",
+        "import/prefer-default-export": "off",
+        "import/export": "off",
+
+        "prefer-arrow/prefer-arrow-functions": "off"
+      }
+    },
+    /**
+     * -----------------------------------------------------
+     * COMPONENT TEMPLATES
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        "linebreak-style": "error"
+      }
+    },
+    /**
+     * -----------------------------------------------------
+     * SCRIPTS
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["**/*.sh"],
+      "rules": {
+        "linebreak-style": "error"
+      }
+    }
+  ]
+}

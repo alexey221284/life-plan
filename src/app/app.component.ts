@@ -1,65 +1,70 @@
 import { Component } from '@angular/core';
 
 type Item = {
-    id: number,
-    name: string,
-    date: string,
-    status: boolean,
+  id: number,
+  name: string,
+  date: string,
+  status: boolean,
 }
 
 @Component({
-    selector: 'app-component',
-    styleUrls: ['app.component.scss'],
-    templateUrl: 'app.component.html',
+  selector: 'app-component',
+  styleUrls: ['app.component.scss'],
+  templateUrl: 'app.component.html',
 })
 
 export class AppComponent {
 
-    items: Item[] | undefined;
+  items?: Item[];
 
-    constructor() {
-        this.initStorage();
+  constructor() {
+    this.initStorage();
+  }
+
+  private initStorage(): void {
+    let rowsVal = localStorage.getItem('rows');
+    rowsVal ? this.items = JSON.parse(rowsVal) : null;
+
+    if (!rowsVal) {
+      this.items = [];
+      localStorage.setItem('rows', JSON.stringify(this.items));
     }
+  }
 
-    private initStorage(): void {
-        let rowsVal = localStorage.getItem("rows");
-        // @ts-ignore
-        this.items = JSON.parse(rowsVal);
+  getLastId() {
+    const getItem = localStorage.getItem('rows');
+    if (getItem) {
+      let rows = JSON.parse(getItem);
+      if (rows.length < 1) {
+        return 0;
+      }
+      return rows[rows.length - 1].id + 1;
+    }
+  }
 
-        if (!rowsVal) {
-            this.items = [];
-            localStorage.setItem("rows", JSON.stringify(this.items));
+  readStorage(): void {
+    const getItem = localStorage.getItem('rows');
+    getItem ? this.items = JSON.parse(getItem) : null;
+  }
+
+  addRow() {
+    const lastId = this.getLastId();
+    this.items?.push({ id: lastId, name: '', date: new Date().toLocaleString(), status: false });
+    localStorage.setItem('rows', JSON.stringify(this.items));
+  }
+
+  deleteRowById(rowId: number): void {
+    const getItem = localStorage.getItem('rows');
+    if (getItem) {
+      let rows = JSON.parse(getItem);
+      for (let i = 0; i < rows.length; i++) {
+        if (rows[i].id === rowId) {
+          rows.splice(i, 1);
+          break;
         }
+      }
+      localStorage.setItem('rows', JSON.stringify(rows));
+      this.readStorage();
     }
-
-    getLastId() {
-        const getItem = localStorage.getItem("rows");
-        let rows = JSON.parse(getItem);
-        if (rows.length < 1) {
-            return 0;
-        }
-        return rows[rows.length-1].id + 1;
-    }
-
-    readStorage(): void {
-        this.items = JSON.parse(localStorage.getItem("rows"))
-    }
-
-    addRow() {
-        const lastId = this.getLastId();
-        this.items?.push({ id: lastId, name: '', date: new Date().toLocaleString(), status: false})
-        localStorage.setItem("rows", JSON.stringify(this.items));
-    }
-
-    deleteRowById(rowId: number): void {
-        let rows = JSON.parse(localStorage.getItem("rows"));
-        for (let i = 0; i < rows.length; i++) {
-            if (rows[i].id === rowId) {
-                rows.splice(i, 1);
-                break;
-            }
-        }
-        localStorage.setItem("rows", JSON.stringify(rows));
-        this.readStorage();
-    }
+  }
 }

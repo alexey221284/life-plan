@@ -1,7 +1,7 @@
 {
   "version": 1,
   "projects": {
-    "autocompleteapp": {
+    "lifePlan": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -9,7 +9,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/autocompleteapp",
+            "outputPath": "client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -20,13 +20,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "autocompleteapp:build",
-            "port": 5000
+            "browserTarget": "lifePlan:build",
+            "port": 7500
           }
         }
       }
     }},
-  "defaultProject": "autocompleteapp",
   "cli": {
     "analytics": "ad9785e1-8793-4ac0-8e63-e21c8bcd6cec"
   }
